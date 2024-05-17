@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Ролі користувачів</h2>
+    {% if user.is_authenticated %}
+        <p>Привіт, {{ user.useraname }}!</p>
+        <p>Ваша роль: {{ user.profile.role }}</p>
+        {% if user.profile.role == "admin" %}
+            <p>Ви маєте доступ до панелі адміна</p>
+        {% elif user.profile.role == "user" %}
+            <p>Ви маєте доступ до функцій користувачей</p>
+        {% else %}
+            <p>Ваша роль не знайдена</p>
+        {% endif %}
+    {% else %}
+        <p>Ви не авторизований ползователь. Будь ласко, <a href="{% url 'login-form' %}">Зареєструйтись</a></p>
+    {% endif %}
+</div>
+{% endblock %}
